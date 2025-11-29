@@ -1,6 +1,6 @@
 import http from 'node:http'
 
-const server = http.createServer((req, res) => {
+const server = http.createServer((_, res) => {
     return res.end("Hello World")
 })
 
