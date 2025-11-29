@@ -22,8 +22,11 @@ spec:
     spec:
       containers:
         - name: app-js
-          image: michaelquesado/node-k8s
+          image: michaelquesado/node-k8s:v2
           imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: app-js-secrets
           ports:
             - containerPort: 8000
           resources:
