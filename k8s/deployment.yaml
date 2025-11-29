@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: app-js
+
+spec:
+  replicas: 2
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+        maxSurge: 20%
+        maxUnavailable: 10%
+  selector:
+    matchLabels:
+      api: app-js
+  template:
+    metadata:
+      labels: 
+        api: app-js
+    spec:
+      containers:
+        - name: app-js
+          image: michaelquesado/node-k8s
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu:  "100m"
+              memory: "65Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
